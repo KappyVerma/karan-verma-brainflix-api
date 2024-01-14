@@ -3,8 +3,6 @@ const { v4: uuid4 } = require("uuid");
 const fs = require("fs");
 const router = express.Router();
 
-router.use(express.json());
-
 router.get("/", (req, res) => {
   const video = fs.readFileSync("./data/videos.json", "utf8");
   res.send(JSON.parse(video));

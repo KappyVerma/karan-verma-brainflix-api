@@ -1,23 +1,22 @@
 require("dotenv").config();
-const apiUrl = `${process.env.BASE_URL}:${process.env.PORT}`;
-const PORT = process.env.PORT || 5050;
+
 const express = require("express");
 const app = express();
-// app.use(middleware);
+const apiUrl = `${process.env.BASE_URL}:${process.env.PORT}`;
+const PORT = process.env.PORT || 5050;
 const cors = require("cors");
+app.use(express.static("public/images"));
+app.use(middleware);
 app.use(cors());
-
-const videoRoutes = require("./routes/videos");
-
 app.use(express.json());
 
-// function middleware(req, res, next) {
-//   console.log(new Date().toLocaleDateString());
-//   console.log(req.url);
-//   next();
-// }
+function middleware(req, res, next) {
+  console.log(new Date().toLocaleDateString());
+  console.log(req.url);
+  next();
+}
 
-app.use(express.static("public/images"));
+const videoRoutes = require("./routes/videos");
 
 app.use("/videos", videoRoutes);
 
